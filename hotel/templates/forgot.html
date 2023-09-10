@@ -1,0 +1,17 @@
+<!-- forgot.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Forgot Password</title>
+</head>
+<body>
+    <h1>Forgot Password</h1>
+    <form method="POST" action="password_reset_sent">
+        {% csrf_token %}
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <a href="/password_reset_sent">Reset Password</a>
+    </form>
+</body>
+</html>

@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<body>
+	<div class="banner-header section-padding valign bg-img bg-fixed" data-overlay-dark="3" data-background="static/img/slider/3.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-left caption mt-90">
+                    <h5>Connect With Us</h5>
+                    <h1>Login</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+	<div id="booking" class="section">
+		<div class="section-center">
+			<div class="container">
+				<div class="row">
+					<div class="booking-formtext-center">
+						<div class="form-header">
+							<h2>Login</h2>
+						</div>
+						<form form method="post" id="loginForm">
+							 {% csrf_token %}
+							
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<input class="form-control" type="text" placeholder="Enter User Name" id="username" name="username" required>
+										<span class="border"></span>
+
+										<input class="form-control" type="password" placeholder="Enter you Password" id="password" name="pass" required>
+										<span class="border"></span>
+									</div>
+									<div class="form-btn">
+										<button class="butn-dark2" type="submit" value="Log in"><span> Login</span></button>
+									</div>
+									<p>
+										Dont Have Account? <a href="/signup" class="new-account-link"> Create a new account</a>
+									</p>
+								</div>
+							</div>
+						
+							
+
+							     <!-- Example template code to display error messages -->
+								 {% if messages %}
+								 <ul class="messages">
+							 {% for message in messages %}
+								 <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+							 {% endfor %}
+								 </ul>
+							 {% endif %}
+
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+	<script src="static/Login/js/jquery.min.js"></script>
+	<script>
+		$('.form-control').each(function () {
+			floatedLabel($(this));
+		});
+
+		$('.form-control').on('input', function () {
+			floatedLabel($(this));
+		});
+
+		function floatedLabel(input) {
+			var $field = input.closest('.form-group');
+			if (input.val()) {
+				$field.addClass('input-not-empty');
+			} else {
+				$field.removeClass('input-not-empty');
+			}
+		}
+	</script>
+
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+
+</html>
+
+{% endblock %}

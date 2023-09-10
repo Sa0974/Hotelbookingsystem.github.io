@@ -1,0 +1,30 @@
+/* ----------------------------------------------------------------
+			[ All Css Plugins & Helper Classes File ]
+-----------------------------------------------------------------*/
+
+/* == bootstrap == */
+@import url("https://duruthemes.com/demo/html/cappa/demo1-light/css/plugins/bootstrap.min.css");
+
+/* == owl.carousel == */
+@import url("https://duruthemes.com/demo/html/cappa/demo1-light/css/plugins/owl.carousel.min.css");
+@import url("https://duruthemes.com/demo/html/cappa/demo1-light/css/plugins/owl.theme.default.min.css");
+
+/* == animate css == */
+@import url("https://duruthemes.com/demo/html/cappa/demo1-light/css/plugins/animate.min.css");
+
+/* == themify & flaticon icons ==*/
+@import url("https://duruthemes.com/demo/html/cappa/demo1-light/css/plugins/themify-icons.css");
+@import url("https://duruthemes.com/demo/html/cappa/demo1-light/css/plugins/flaticon.css");
+
+/* == magnific-popup gallery  == */
+@import url("https://duruthemes.com/demo/html/cappa/demo1-light/css/plugins/magnific-popup.css");
+
+/* == YouTubePopUp == */
+@import url("https://duruthemes.com/demo/html/cappa/demo1-light/css/plugins/YouTubePopUp.css");
+
+/* == for booking css == */
+@import url("https://duruthemes.com/demo/html/cappa/demo1-light/css/plugins/select2.css");
+@import url("https://duruthemes.com/demo/html/cappa/demo1-light/css/plugins/datepicker.css");
+
+/* == Vegas Slider == */
+@import url("https://duruthemes.com/demo/html/cappa/demo1-light/css/plugins/vegas.slider.min.css");

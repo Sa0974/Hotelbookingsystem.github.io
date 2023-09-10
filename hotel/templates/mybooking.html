@@ -1,0 +1,167 @@
+
+
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+	<title>Booking Form HTML Template</title>
+
+	<!-- Google font -->
+	<link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
+
+	<!-- Bootstrap -->
+	<link type="text/css" rel="stylesheet" href="static/Login/css/bootstrap.min.css" />
+
+	<!-- Custom stlylesheet -->
+	<!-- <link type="text/css" rel="stylesheet" href="static/Login/css/style.css" /> -->
+
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+</head>
+
+<body>
+	<div id="booking" class="section">
+		<div class="section-center">
+			<div class="container">
+				<div class="row">
+					<div class="booking-form">
+						<div class="form-header">
+							<h1>Make your reservation</h1>
+						</div>
+						<form form method="post">
+							 {% csrf_token %}
+							 <table class="table">
+								<thead>
+								  <tr>
+									<th scope="col">Check In</th>
+									<th scope="col">Check Out</th>
+									<th scope="col">No Adults</th>
+									<th scope="col">No Children</th>
+									<th scope="col">No of Rooms</th>
+									<th scope="col">Status</th>
+									<th scope="col">Actions</th>
+								  </tr>
+								</thead>
+								<tbody>
+									<tr id="booking-{{ booking.id }}">
+										<td class="check-in">{{ booking.check_in }}</td>
+										<td class="check-out">{{ booking.check_out }}</td>
+										<td class="num-adults">{{ booking.num_adults }}</td>
+										<td class="num-childrens">{{ booking.num_childrens }}</td>
+										<td class="num-rooms">{{ booking.num_rooms }}</td>
+										<td>
+											{% if booking.status == 'Pending' %}
+												<button type="button" class="btn btn-secondary" onclick="updateStatus('{{ booking.id }}', 'Booked')">Pending</button>
+											{% elif booking.status == 'Available' %}
+												<button type="button" class="btn btn-success" onclick="updateStatus('{{ booking.id }}', 'Not Available')">Booked</button>
+											{% elif booking.status == 'Not Available' %}
+												<button type="button" class="btn btn-primary" onclick="updateStatus('{{ booking.id }}', 'Pending')">Not Available</button>
+											{% endif %}
+										</td>
+										
+										<td>
+											<button type="button" class="btn btn-danger" onclick="deleteBooking('{{ booking.id }}')">Delete</button>
+											:
+											<button type="button" class="btn btn-success" onclick="editBooking('{{ booking.id }}')">Edit</button>
+										</td>
+									</tr>
+									
+								  
+								</tbody>
+							  </table>
+							
+							
+							
+
+						</form>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+	<script src="static/Login/js/jquery.min.js"></script>
+	<script>
+		function updateStatus(id, status) {
+    // Send an AJAX request to update the booking status
+    var url = '/bookings/update_status/' + id + '/';
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', url);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.setRequestHeader('X-CSRFToken', '{{ csrf_token }}');
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            // Update the status button text
+            var bookingStatus = document.getElementById("booking-" + id).querySelector(".booking-status");
+            bookingStatus.textContent = status;
+        } else {
+            // Display an error message or handle the error
+        }
+    };
+    xhr.send(JSON.stringify({ status: status }));
+}
+
+// Add an event listener to wait for the document to be fully loaded
+document.addEventListener("DOMContentLoaded", function() {
+    // Retrieve all status buttons and update their initial text
+    var statusButtons = document.getElementsByClassName("booking-status");
+    Array.from(statusButtons).forEach(function(button) {
+        var bookingStatus = button.textContent.trim();
+        if (bookingStatus === "Pending") {
+            button.textContent = "Pending";
+        } else if (bookingStatus === "Available") {
+            button.textContent = "Booked";
+        } else if (bookingStatus === "Not Available") {
+            button.textContent = "Not Available";
+        }
+    });
+});
+
+		
+
+
+
+		$('.form-control').each(function () {
+			floatedLabel($(this));
+		});
+
+		$('.form-control').on('input', function () {
+			floatedLabel($(this));
+		});
+
+		function floatedLabel(input) {
+			var $field = input.closest('.form-group');
+			if (input.val()) {
+				$field.addClass('input-not-empty');
+			} else {
+				$field.removeClass('input-not-empty');
+			}
+		}
+
+		
+	</script>
+
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+
+</html>
+
+{% endblock %}

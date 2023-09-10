@@ -1,0 +1,32 @@
+<h1>User Profile</h1>
+<p>Username: {{ username }}</p>
+<p>Email: {{ email }}</p>
+
+<button id="edit-profile-btn">Edit Profile</button>
+
+<div id="edit-profile-form" style="display: none;">
+  <form method="POST" action="{% url 'update_profile' %}">
+    {% csrf_token %}
+    <label for="new-username">New Username:</label>
+    <input type="text" id="new-username" name="new_username" value="{{ username }}"><br>
+
+    <label for="new-email">New Email:</label>
+    <input type="email" id="new-email" name="new_email" value="{{ email }}"><br>
+
+    <input type="submit" value="Save">
+  </form>
+</div>
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const editBtn = document.getElementById('edit-profile-btn');
+      const editForm = document.getElementById('edit-profile-form');
+  
+      editBtn.addEventListener('click', function() {
+        editForm.style.display = 'block';
+      });
+    });
+  </script>
+  
